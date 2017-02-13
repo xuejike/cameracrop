@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="webcam/webcam.min.js"></script>
+    <script type="text/javascript" src="jcrop/js/jquery.min.js"></script>
+    <script type="text/javascript" src="cropper/cropper.min.js"></script>
+    <link rel="stylesheet" href="cropper/cropper.min.css"/>
+    <script type="text/javascript" src="cameraCrop.js"></script>
+</head>
+<body><button onclick="cameraC.take(5/7)">拍照并截图</button>
+<body><button onclick="cameraC.switchToCamera()">切换到照相机</button>
+<body><button onclick="$('#zz').attr('src',cameraC.getImgData())">截图</button>
+    <div id="cc" style="width:320px;height: 240px; "></div>
+    <img src="" id="zz"/>
+<script>
+      var cameraC=new cameraCrop('cc',320,240);
+      cameraC.start();
+</script>
+</body>
+</html>

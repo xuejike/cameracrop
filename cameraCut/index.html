@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- First, include the Webcam.js JavaScript Library -->
+<script type="text/javascript" src="webcam/webcam.min.js"></script>
+<script type="text/javascript" src="jcrop/js/jquery.min.js"></script>
+<script type="text/javascript" src="jcrop/js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="jcrop/css/jquery.Jcrop.min.css"/>
+
+<div >
+    <button onclick="take_snapshot()">拍照</button>
+    <div id="my_camera" style="position: absolute;width: 340px;height: 300px;background-color: #cccccc"></div>
+
+
+    <div id="results" style="position: absolute;width: 340px;height: 300px;background-color: #00ff00;display: none">
+
+    </div>
+
+</div>
+
+
+<!-- Configure a few settings and attach camera -->
+<script language="JavaScript">
+    Webcam.set({
+        // live preview size
+        width: 320,
+        height: 240,
+
+        // device capture size
+        dest_width: 320,
+        dest_height: 240,
+
+        // final cropped size
+        crop_width: 240,
+        crop_height: 240,
+
+        // format and quality
+        image_format: 'bmp',
+        jpeg_quality: 90
+    });
+
+    Webcam.attach( '#my_camera' );
+</script>
+
+<script language="JavaScript">
+    function take_snapshot() {
+        // take snapshot and get image data
+        Webcam.snap( function(data_uri) {
+//            $("#my_camera").hide();
+
+//            Webcam.off();off
+            // display results in page
+            $("#results").show();
+            document.getElementById('results').innerHTML =
+                '<img id="snapImg" src="'+data_uri+'"/>';
+            setTimeout(function () {
+                $("#snapImg").Jcrop({
+
+                    bgColor:     'black',
+                    bgOpacity:   .4,
+//                    setSelect:   [ 100, 100, 50, 50 ],
+                    aspectRatio: 16 / 9
+                });
+            },200)
+
+        } );
+    }
+</script>
+</body>
+</html>
